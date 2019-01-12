@@ -10,33 +10,35 @@ import Foundation
 
 public class Calculator {
     public func calculate(_ args: [String]) -> Int {
-        var last = args[args.count - 1]
+        let last = args[args.count - 1]
         switch last {
         case "count" :
             return args.count - 1
         case "avg" :
-            last = "0"
+            if (args.count == 1) {
+                return 0
+            }
             var result = 0
             for index in args {
-                let i:Int? = Int(index)
-                result = result + i!
+                let i:Int = Int(index) ?? 0
+                result = result + i
             }
             result = result / (args.count - 1)
             return result
         case "fact" :
-            var result : Int
+            var result = 0
             if (args.count == 1) {
-                return 0
+                return result
             }
-            var fac:Int? = Int(args[0])
-            if (fac! == 0 || fac! == 1) {
+            var fac:Int = Int(args[0]) ?? 0
+            if (fac == 0 || fac == 1) {
                 result = 1
             } else {
-                result = fac!
-                fac = fac! - 1
-                while (fac! > 1) {
-                    result = result * fac!
-                    fac = fac! - 1
+                result = fac
+                fac = fac - 1
+                while (fac > 1) {
+                    result = result * fac
+                    fac = fac - 1
                 }
             }
             return result
